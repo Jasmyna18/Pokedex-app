@@ -1,0 +1,9 @@
+<div class="captured-pokemon-list">
+  <h2>Pokemons I've Caught</h2>
+  <div *ngIf="capturedPokemons.length === 0">No pokemons captured yet!</div>
+  <div class="pokemon-card" *ngFor="let pokemon of capturedPokemons">
+    <img [src]="pokemon.sprites.front_default" alt="Pokemon">
+    <h3>{{ pokemon.name }}</h3>
+    <button class='remove-btn' (click)="removeCapturedPokemon(pokemon.name)">Remove Pokémon</button>
+  </div>
+</div>

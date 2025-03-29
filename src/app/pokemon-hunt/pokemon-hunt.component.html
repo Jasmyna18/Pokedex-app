@@ -1,0 +1,45 @@
+<div class="pokemon-hunt-container">
+  <!-- Title and special Pokemons -->
+  <div *ngIf="!isGameActive && !gameOver">
+    <h1>Pokemon Hunt - Capture the Special Pokémon!</h1>
+    <p>Can you catch one of these rare Pokémon?</p>
+    <div class="special-pokemon-list">
+      <div class="pokemon-card" *ngFor="let pokemon of specialPokemons">
+        <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+        <h3>{{ pokemon.name | titlecase }}</h3>
+      </div>
+    </div>
+    <h2>Poké Ball Hunt!</h2>
+    <p>Try to catch as many Poké Balls as you can in 10 seconds!</p>
+    <button (click)="startGame()" class="start-game-btn">Start Game</button>
+  </div>
+
+  <!-- PokéBile game -->
+  <div *ngIf="isGameActive" class="game-zone">
+    <div *ngFor="let pokeball of pokeballs; let i = index"
+         class="pokeball"
+         [ngStyle]="{'top': pokeball.top + 'px', 'left': pokeball.left + 'px', 'background-color': pokeball.color}"
+         (click)="catchPokeball(i)">
+    </div>
+  </div>
+
+  <!-- The prize after finishing the game -->
+  <div *ngIf="gameOver" class="game-over-message">
+    <!-- If won can catch one special Pokemon -->
+    <p class="win-message">{{ winMessage }}</p>
+    <div *ngIf="capturedPokemon">
+      <div class="center-container">
+        <div class="pokemon-card-received">
+          <img [src]="capturedPokemon.sprites.front_default" alt="{{ capturedPokemon.name }}" />
+          <h3>{{ capturedPokemon.name | titlecase }}</h3>
+          <button (click)="catchCapturedPokemon()" class="catch-pokemon-btn">Catch it!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- If lose can try again -->
+    <div *ngIf="winMessage !== 'The Pokémon was successfully captured!'">
+      <button (click)="restartGame()" class="restart-game-btn">Try again</button>
+    </div>
+  </div>
+</div>

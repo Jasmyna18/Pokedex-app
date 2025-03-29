@@ -1,0 +1,45 @@
+<div class="message-container">
+  <p class="find-pokemon-message">Find your Pokémon</p>
+</div>
+
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Search for a Pokémon..."
+    [(ngModel)]="searchQuery"
+    (input)="filterPokemons()"
+    class="search-bar">
+</div>
+
+<div class="pokemon-list">
+  <div class="box" *ngFor="let pokemon of filteredPokemons | paginate: { itemsPerPage: 9, currentPage: page }">
+    <img [src]="pokemon.sprites.front_default" alt="Pokemon">
+    <div class="info">
+      <h3>{{ pokemon.name }}</h3>
+
+      <p *ngIf="pokemon.types?.length">
+        <b>Type:</b> {{ pokemon.types[0].type.name }}
+      </p>
+
+      <p *ngIf="pokemon.abilities?.length">
+        <b>Ability:</b> {{ pokemon.abilities[0].ability.name }}
+      </p>
+
+      <p *ngIf="pokemon.height">
+        <b>Height:</b> {{ pokemon.height }}
+      </p>
+
+      <p *ngIf="pokemon.stats?.length">
+        <b>Health:</b> {{ pokemon.stats[0].base_stat }}
+      </p>
+
+      <button class='catch-btn' (click)="capturePokemon(pokemon)">Catch</button>
+    </div>
+  </div>
+</div>
+
+<div class="notification" *ngIf="notificationMessage" [ngClass]="notificationClass">
+  {{ notificationMessage }}
+</div>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
