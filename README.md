@@ -4,13 +4,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This is an Angular-based Pokemon application that allows users to:
 
-View a paginated list of Pokemon and search for them by their names.
+1. View a paginated list of Pokemon and search for them by their names.
 
-Catch Pokemon and store them locally.
+2. Catch Pokemon and store them locally.
 
-View the list of captured Pokemon and remove them from the list.
+3. View the list of captured Pokemon and remove them from the list.
 
-Play a Pokemon-catching mini-game.
+4. Play a Pokemon-catching mini-game.
 
 ## Installation and Setup
 
